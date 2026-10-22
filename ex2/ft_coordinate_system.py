@@ -35,29 +35,23 @@ def main() -> None:
     print("=== Game Coordinate System ===\n")
     print("Get first set of coordinates")
     first_coordinate = get_player_pos()
-    print("Got a first tuple: (", first_coordinate[0], ", ",
-          first_coordinate[1], ", ",
-          first_coordinate[2], ")", sep="")
-    print("It includes: X=", first_coordinate[0], ", Y=",
-          first_coordinate[1], ", Z=",
-          first_coordinate[2], sep="")
+    x, y, z = first_coordinate
+    print("Got a first tuple: (", x, ", ", y, ", ", z, ")", sep="")
+    print("It includes: X=", x, ", Y=", y, ", Z=", z, sep="")
     distance_center = round(
-        math.sqrt(sum([
-            first_coordinate[0] ** 2,
-            first_coordinate[1] ** 2,
-            first_coordinate[2] ** 2
-        ])), 4)
+        math.sqrt(sum([x ** 2, y ** 2, z ** 2])), 4)
 
     print("Distance to center:", distance_center)
 
     print("\nGet second set of coordinates")
     second_coordinate = get_player_pos()
 
+    x2, y2, z2 = second_coordinate
     distance = round(
         math.sqrt(sum([
-            (second_coordinate[0] - first_coordinate[0]) ** 2,
-            (second_coordinate[1] - first_coordinate[1]) ** 2,
-            (second_coordinate[2] - first_coordinate[2]) ** 2
+            (x2 - x) ** 2,
+            (y2 - y) ** 2,
+            (z2 - z) ** 2
         ])), 4)
     print("Distance between the 2 sets of coordinates:", distance)
 

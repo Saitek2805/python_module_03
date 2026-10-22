@@ -34,33 +34,35 @@ def main() -> None:
         except ValueError as e:
             print(f"Quantity error for '{temp[0]}':", e)
 
-    print("Got inventory:", inventory)
+    if inventory:
+        print("Got inventory:", inventory)
+        items = list(inventory.keys())
+        print("Item list:", items)
 
-    items = list(inventory.keys())
-    print("Item list:", items)
+        total = sum(inventory.values())
+        print("Total quantity of the", len(items), "items", total)
 
-    total = sum(inventory.values())
-    print("Total quantity of the", len(items), "items", total)
+        most_abundant = items[0]
+        least_abundant = items[0]
+        for item in inventory:
+            quantity = inventory[item]
+            if quantity > inventory[most_abundant]:
+                most_abundant = item
+            if quantity < inventory[least_abundant]:
+                least_abundant = item
+            percentage = round(quantity / total * 100, 1)
+            print("Item ", item, " represents ", percentage, "%", sep="")
 
-    most_abundant = items[0]
-    least_abundant = items[0]
-    for item in inventory:
-        quantity = inventory[item]
-        if quantity > inventory[most_abundant]:
-            most_abundant = item
-        if quantity < inventory[least_abundant]:
-            least_abundant = item
-        percentage = round(quantity / total * 100, 1)
-        print("Item ", item, " represents ", percentage, "%", sep="")
+        highest = inventory[most_abundant]
+        print("Item most abundant:", most_abundant, "with quantity", highest)
 
-    highest = inventory[most_abundant]
-    print("Item most abundant:", most_abundant, "with quantity", highest)
+        lowest = inventory[least_abundant]
+        print("Item least abundant:", least_abundant, "with quantity", lowest)
 
-    lowest = inventory[least_abundant]
-    print("Item least abundant:", least_abundant, "with quantity", lowest)
-
-    inventory.update({"magic_item": 1})
-    print("Updated inventory:", inventory)
+        inventory.update({"magic_item": 1})
+        print("Updated inventory:", inventory)
+    else:
+        print("Usage: python3 ft_inventory_system.p <item:quantity>, ...")
 
 
 if __name__ == "__main__":
